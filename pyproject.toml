@@ -1,0 +1,82 @@
+[build-system]
+requires = ["flit_core >=4.0,<5"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "django-bucketav"
+authors = [
+    {name = "Jake Howard", email = "jake.howard@torchbox.com"},
+    {name = "Nick Moreton", email = "nick.moreton@torchbox.com"},
+    {name = "Joshua Munn", email = "joshua.munn@torchbox.com"},
+    {name = "Andy Babic", email = "andy.babic@torchbox.com"}
+]
+maintainers = [{name = "Dan Braghis", email="dan.braghis@torchbox.com"}]
+description = "Uploaded file scanning for Django/Wagtail using BucketAV"
+readme = "README.md"
+license = {file = "LICENSE"}
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: 3.15",
+    "Framework :: Django",
+    "Framework :: Django :: 5.2",
+    "Framework :: Django :: 6.0",
+    "Framework :: Django :: 6.1",
+    "Framework :: Wagtail",
+    "Framework :: Wagtail :: 7",
+    "Framework :: Wagtail :: 8",
+    "Typing :: Typed",
+]
+requires-python = ">=3.12"
+dynamic = ["version"]
+dependencies = [
+    "Django>=5.2",
+    "django_sns_view>=1.0.1"
+]
+[project.optional-dependencies]
+linting = [
+    "prek>=0.5.10,<0.6",
+    "ty==0.0.99",
+    "django-stubs==6.1.2",
+]
+testing = [
+    "dj-database-url==3.1.2",
+    "coverage>=7.17.2,<8",
+    "time-machine>=3.6.0,<4",
+]
+coverage = ["coverage>=7.17.2,<8"]
+tox = ["tox>=4.55.1,<5",]
+ci = [
+    "tox>=4.55.1,<5",
+    "tox-gh-actions>=3.5,<4",
+]
+
+dev = ["django_bucketav[linting, test, tox]"]
+
+[project.urls]
+Home = "https://github.com/torchbox/django-bucketav"
+Changelog = "https://github.com/torchbox/django-bucketav/blob/main/CHANGELOG.md"
+Documentation = "https://github.com/torchbox/django-bucketav/blob/main/docs/"
+
+[tool.flit.module]
+name = "django_bucketav"
+
+[tool.flit.sdist]
+exclude = [
+    "docs",
+    "tests",
+    ".*",
+    "*.js",
+    "*.json",
+    "*.ini",
+    "*.yml",
+    "ruff.toml",
+    "Makefile",
+]

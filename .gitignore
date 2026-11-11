@@ -1,0 +1,26 @@
+# Directories in the project root
+/.venv/
+/venv/
+/.vscode/
+/.tox/
+/build/
+/dist/
+
+# Files in the project root
+/.coverage*
+!/.coveragerc
+
+# Files anywhere
+*.db
+*.sqlite3
+*.py[co]
+*.swp
+*.egg-info
+.env
+
+# Directories anywhere
+.ruff_cache/
+.pytest_cache/
+__pycache__/
+tests/test-media
+tests/test-static
