@@ -38,7 +38,8 @@ requires-python = ">=3.12"
 dynamic = ["version"]
 dependencies = [
     "Django>=5.2",
-    "django_sns_view>=1.0.1"
+    "django_sns_view>=1.0.1",
+    "boto3>1.43,<2"
 ]
 [project.optional-dependencies]
 wagtail = [

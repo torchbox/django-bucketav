@@ -96,6 +96,12 @@ inherits from `BucketAVMixin` will get a `bucketav_scan_status` and a `bucketav_
 And if the model is referenced in the `DJANGO_BUCKETAV_MODELS` Django setting, it will automatically be updated
 every time BucketAV sends an update for a file managed by it.
 
+## Management command
+
+The package provides a management command `update_bucketav_scan_status` that can be run at regular intervals to handle any
+potentially missed webhook updates. The management command will only pick up models configure in the `DJANGO_BUCKETAV`
+setting that inherit from `BucketAVMixin`.
+
 ## Wagtail
 
 To make your Wagtail instance work with the package, add `django_bucketav.wagtail` to your `INSTALLED_APPS`, and ensure

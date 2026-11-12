@@ -3,7 +3,9 @@ import json
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 from django.urls import reverse
-from testapp.models import MyModel, MyModelWithBucketAVMixin
+from testapp.models import CustomDocument, MyModel, MyModelWithBucketAVMixin
+
+from django_bucketav.enums import FileScanStatus
 
 
 SNS_ARN = "arn:aws:sns:eu-west-1:123456789012:bucketav-topic"
@@ -30,6 +32,16 @@ def get_mymodel_with_bucketav_mixin_instance(file=None) -> MyModelWithBucketAVMi
     return MyModelWithBucketAVMixin.objects.create(file=file)
 
 
+def get_wagtail_document(status=FileScanStatus.NOT_SCANNED):
+    doc = CustomDocument(
+        title="Test document",
+        file=SimpleUploadedFile("test.pdf", b"file content"),
+        bucketav_scan_status=status,
+    )
+    doc.save()
+    return doc
+
+
 class DjangoBucketAVTestBase(TestCase):
     @classmethod
     def setUpTestData(cls) -> None:
@@ -39,7 +51,7 @@ class DjangoBucketAVTestBase(TestCase):
         self,
         *,
         key="test.pdf",
-        status="clean",
+        status=FileScanStatus.CLEAN,
         bucket=AWS_BUCKET_NAME,
         topic_arn=SNS_ARN,
         headers: dict[str, str] | None = None,
