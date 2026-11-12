@@ -41,6 +41,9 @@ dependencies = [
     "django_sns_view>=1.0.1"
 ]
 [project.optional-dependencies]
+wagtail = [
+    "wagtail>=7.4"
+]
 linting = [
     "prek>=0.5.10,<0.6",
     "ty==0.0.99",
@@ -50,6 +53,7 @@ testing = [
     "dj-database-url==3.1.2",
     "coverage>=7.17.2,<8",
     "time-machine>=3.6.0,<4",
+    "wagtail>=7.4"
 ]
 coverage = ["coverage>=7.17.2,<8"]
 tox = ["tox>=4.55.1,<5",]
@@ -58,7 +62,7 @@ ci = [
     "tox-gh-actions>=3.5,<4",
 ]
 
-dev = ["django_bucketav[linting, test, tox]"]
+dev = ["django_bucketav[wagtail, linting, test, tox]"]
 
 [project.urls]
 Home = "https://github.com/torchbox/django-bucketav"

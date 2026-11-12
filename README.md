@@ -96,6 +96,26 @@ inherits from `BucketAVMixin` will get a `bucketav_scan_status` and a `bucketav_
 And if the model is referenced in the `DJANGO_BUCKETAV_MODELS` Django setting, it will automatically be updated
 every time BucketAV sends an update for a file managed by it.
 
+## Wagtail
+
+To make your Wagtail instance work with the package, add `django_bucketav.wagtail` to your `INSTALLED_APPS`, and ensure
+your custom document model inherits from `BucketAVMixin`:
+
+```python
+from wagtail.documents.models import AbstractDocument
+from wagtail.documents.models import Document as WagtailDocument
+
+from django_bucketav.models import BucketAVMixin
+
+
+class CustomDocument(BucketAVMixin, AbstractDocument):
+    admin_form_fields = WagtailDocument.admin_form_fields
+    ...
+```
+
+`django_bucketav.wagtail` adds a [`before_serve_document`](https://docs.wagtail.org/en/stable/reference/hooks.html#before-serve-document) hook
+that will block serving any documents that are not marked as clean. Note that this will be skipped if
+[`WAGTAILDOCS_SERVE_METHOD`](https://docs.wagtail.org/en/stable/reference/settings.html#wagtaildocs-serve-method) is set to `redirect`.
 
 ## Contributing
 

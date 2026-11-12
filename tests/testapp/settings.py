@@ -26,13 +26,20 @@ CACHES = {
 
 INSTALLED_APPS = [
     "django_bucketav",
+    "django_bucketav.wagtail",
     "testapp",
+    "wagtail.users",
+    "wagtail.documents",
+    "wagtail.images",
+    "wagtail.admin",
+    "wagtail.sites",
+    "wagtail",
+    "taggit",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "django.contrib.sites",
 ]
 
 if DATABASES["default"]["ENGINE"] != "django.db.backends.sqlite3":
@@ -40,10 +47,13 @@ if DATABASES["default"]["ENGINE"] != "django.db.backends.sqlite3":
 
 
 MIDDLEWARE = [
+    "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
 ROOT_URLCONF = "testapp.urls"
@@ -64,6 +74,10 @@ STATIC_URL = "/static/"
 
 MEDIA_ROOT = PROJECT_DIR / "test-media"
 
+# Wagtail settings
+WAGTAIL_SITE_NAME = "Wagtail Sharepoint test site"
+WAGTAILADMIN_BASE_URL = "http://testserver"
+WAGTAILDOCS_DOCUMENT_MODEL = "testapp.CustomDocument"
 
 SNS_VERIFY_CERTIFICATE = False
 
